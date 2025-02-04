@@ -10,23 +10,24 @@
  */
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 {
-    binary_tree_t *new_node;
+	if (parent == NULL)
+		return (NULL);
 
-    if (parent == NULL)
-        return (NULL);
+	/* Create new node */
+	binary_tree_t *new_node = binary_tree_node(parent, value);
+	if (new_node == NULL)
+		return (NULL);
 
-    new_node = binary_tree_node(parent, value);
-    if (new_node == NULL)
-        return (NULL);
+	/* Handle the existing right child of the parent */
+	if (parent->right != NULL)
+	{
+		new_node->right = parent->right;
+		parent->right->parent = new_node;
+	}
 
-    if (parent->right != NULL)
-    {
-        new_node->right = parent->right;
-        parent->right->parent = new_node;
-    }
+	/* Insert the new node as the right child */
+	parent->right = new_node;
 
-    parent->right = new_node;
-
-    return (new_node);
+	return (new_node);
 }
 
