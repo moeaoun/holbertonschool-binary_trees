@@ -61,6 +61,10 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
     /* Find the depth of the tree */
     depth = binary_tree_depth(tree);
 
+    /* Special case: A tree with just the root node is perfect */
+    if (tree->left == NULL && tree->right == NULL)
+        return (1);
+
     /* Check if the tree is perfect */
     return (is_perfect_helper(tree, depth, 0));
 }
